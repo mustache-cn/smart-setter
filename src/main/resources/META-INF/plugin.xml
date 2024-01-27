@@ -1,0 +1,27 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>cn.com.mustache.plugins.smart.setter</id>
+    <name>Smart Setter</name>
+    <vendor email="steven@mustache.com.cn" url="https://mustache.com.cn">Mustache</vendor>
+
+    <description>
+        <![CDATA[
+        Smart Setter quickly generates pairs of setters to free your hands. For objects with many attributes, say goodbye to manual input, one-click generation of all setter methods, efficient and accurate. Improve coding efficiency, reduce errors, and make development smoother.<br/>
+    ]]>
+    </description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Smart Setter Notification Group" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="SmartSetterAction" class="cn.com.mustache.plugins.smart.setter.action.SmartSetterAction"
+                text="Output All Set" description="Output all set">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl G"/>
+        </action>
+    </actions>
+</idea-plugin>
