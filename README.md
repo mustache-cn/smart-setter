@@ -7,8 +7,7 @@
 ![logo.png](img/logo.png)
 
 <!-- Plugin description -->
-**Smart Setter** quickly generates pairs of setters to free your hands. For objects with many attributes, say goodbye to manual input, one-click generation of all setter methods, efficient and accurate. Improve coding efficiency, reduce errors, and make development smoother..
-[gh:template]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
+**Smart Setter** quickly generates pairs of setters to free your hands. For objects with many attributes, say goodbye to manual input, one-click generation of all setter methods, efficient and accurate. Improve coding efficiency, reduce errors, and make development smoother.
 <!-- Plugin description end -->
 
 ## What is Smart Setter?
