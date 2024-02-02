@@ -8,7 +8,6 @@
 
 <!-- Plugin description -->
 **Smart Setter** quickly generates pairs of setters to free your hands. For objects with many attributes, say goodbye to manual input, one-click generation of all setter methods, efficient and accurate. Improve coding efficiency, reduce errors, and make development smoother.
-<!-- Plugin description end -->
 
 ## What is Smart Setter?
 
@@ -21,23 +20,25 @@ Smart Setter quickly generates pairs of setters to free your hands. For objects 
 - [x] Supports Java languages. Supports , Spring framework (Lombok)
 - [x] Quick search url to navigate to service declaration. ( windows: Ctrl + N macos：Command + N) .
 
+## Plugin running screenshot
 Quick Generate All Setter
 
-![shortcut-option.png](img/shortcut-option.png)
+![shortcut-option.png](https://github.com/mustache-cn/smart-setter/assets/3905303/3414aeef-6411-4c96-8192-bd5253683b21)
 
 Common class
 
-![common-class.png](img/common-class.png)
+![common-class.png](https://github.com/mustache-cn/smart-setter/assets/3905303/d34170ef-b1de-4808-8a52-e2b4614f6e67)
 
 Lombok Builder
 
-![lombok-builder.png](img/lombok-builder.png)
+![lombok-builder.png](https://github.com/mustache-cn/smart-setter/assets/3905303/3a2ed5c4-0364-4e55-b020-33c5d47b0bca)
 
+<!-- Plugin description end -->
 
 ## Installation
 
 <a href="https://plugins.jetbrains.com/embeddable/install/23654">
-    <img src="img/plugin-install.png" width="300"/>
+    <img src="img/plugin-install.png" width="249" alt="smart setter"/>
 </a>
 
 - Using IDE built-in plugin system:

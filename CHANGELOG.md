@@ -2,6 +2,12 @@
 
 # Smart Setter Changelog
 
+## [0.0.4] - 2024-02-01
+
+### Change
+
+- Modify description information
+
 ## [0.0.3] - 2024-02-01
 
 ### Editor
