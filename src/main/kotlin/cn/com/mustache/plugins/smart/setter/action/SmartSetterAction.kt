@@ -17,15 +17,31 @@ import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiTypesUtil
 
+/**
+ * @author Steven
+ *
+ *  * Action responsible for generating smart setters in Kotlin/Java classes.
+ *
+ */
 class SmartSetterAction : AnAction() {
+
+    /**
+     * Updates the presentation of the action.
+     */
     override fun update(e: AnActionEvent) {
         e.presentation.isEnabled = e.getData(CommonDataKeys.EDITOR) != null
     }
 
+    /**
+     * Returns the [ActionUpdateThread] for this action.
+     */
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
     }
 
+    /**
+     * Handles the main functionality of the smart setter action.
+     */
     override fun actionPerformed(e: AnActionEvent) {
         val editor = e.getRequiredData(CommonDataKeys.EDITOR)
         val psiFile = e.getData(CommonDataKeys.PSI_FILE)
@@ -45,18 +61,28 @@ class SmartSetterAction : AnAction() {
             )
             return
         }
-        val setFields: Map<String, Any?> = if (result.hasBuilder) {
-            getFields(result.psiClass)
-        } else {
-            getSetMethods(result.psiClass)
-        }
+        val setFields: Map<String, Any?> = getFields(result)
         generateSetter(editor, offset, result, setFields)
-        NotificationUtil.notify(project, "", "Generate Success", NotificationType.INFORMATION)
+        NotificationUtil.notify(project, "Generate Success", NotificationType.INFORMATION)
     }
 
+    private fun getFields(result: SetterInfo): Map<String, Any?> {
+        if (result.psiClass == null) {
+            return mutableMapOf();
+        }
+        return if (result.hasBuilder) {
+            result.psiClass.setFields()
+        } else {
+            result.psiClass.setMethods()
+        }
+    }
+
+    /**
+     * Retrieves information about the PsiClass at the current caret position.
+     */
     private fun getPsiClass(editor: Editor, psiFile: PsiFile, offset: Int): SetterInfo {
-        val elementAtCaret = psiFile.findElementAt(offset)
-        val variable = PsiTreeUtil.getParentOfType(elementAtCaret, PsiLocalVariable::class.java)
+        val elementAtCursor = psiFile.findElementAt(offset)
+        val variable = PsiTreeUtil.getParentOfType(elementAtCursor, PsiLocalVariable::class.java)
         val type = variable?.type
         val psiClass = type?.let { PsiTypesUtil.getPsiClass(it) }
         val hasBuilder = psiClass.hasBuilderAnnotation()
@@ -73,8 +99,11 @@ class SmartSetterAction : AnAction() {
         } ?: SetterInfo(null, "", 0, false)
     }
 
-    private fun getSetMethods(psiClass: PsiClass): Map<String, PsiMethod?> {
-        val setMethods = psiClass.methods
+    /**
+     * Retrieves the set methods of a PsiClass.
+     */
+    private fun PsiClass.setMethods(): Map<String, PsiMethod?> {
+        val setMethods = this.methods
             .filter {
                 it.hasModifierProperty(PsiModifier.PUBLIC)
                         && !it.hasModifierProperty(PsiModifier.STATIC)
@@ -84,8 +113,11 @@ class SmartSetterAction : AnAction() {
         return setMethods;
     }
 
-    private fun getFields(psiClass: PsiClass): Map<String, PsiField?> {
-        val setFields = psiClass.fields
+    /**
+     * Retrieves the fields of a PsiClass.
+     */
+    private fun PsiClass.setFields(): Map<String, PsiField?> {
+        val setFields = this.fields
             .filter {
                 it.hasModifierProperty(PsiModifier.PRIVATE)
                         && !it.hasModifierProperty(PsiModifier.STATIC)
@@ -94,6 +126,9 @@ class SmartSetterAction : AnAction() {
         return setFields;
     }
 
+    /**
+     * Generates and inserts setter code based on the provided information.
+     */
     private fun generateSetter(editor: Editor, offset: Int, setterInfo: SetterInfo, setMap: Map<String, Any?>) {
         WriteCommandAction.runWriteCommandAction(editor.project) {
             val blankSpace = " ".repeat(setterInfo.leadingSpaces)
