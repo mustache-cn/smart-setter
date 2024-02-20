@@ -16,9 +16,11 @@ Smart Setter quickly generates pairs of setters to free your hands. For objects 
 
 ## Features
 
-- [x] Support for Java 11+, IDEA 2022.2+.
+- [x] Support for IDEA 2022.2+.
 - [x] Supports Java languages. Supports , Spring framework (Lombok)
 - [x] Quick search url to navigate to service declaration. ( windows: Ctrl + N macos：Command + N) .
+
+<!-- Plugin description end -->
 
 ## Plugin running screenshot
 Quick Generate All Setter
@@ -33,7 +35,6 @@ Lombok Builder
 
 ![lombok-builder.png](https://github.com/mustache-cn/smart-setter/assets/3905303/3a2ed5c4-0364-4e55-b020-33c5d47b0bca)
 
-<!-- Plugin description end -->
 
 ## Installation
 
